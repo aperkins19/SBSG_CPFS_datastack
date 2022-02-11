@@ -1,3 +1,14 @@
+# Introduction
+
+This python package will allow you to interact with the SBSG CFPS Database.
+
+When the docker compose has spun up all of the containers in the docker network, run:
+
+    docker exec -it api_tester /bin/bash
+
+Then execute your scripts:
+e.g.
+    python test.py
 
 # Installation
 
