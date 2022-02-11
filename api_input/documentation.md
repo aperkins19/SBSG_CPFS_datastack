@@ -1,8 +1,8 @@
 
 # Installation
 
-import SBSG_api_interface.energy_solution_functions as es
-import SBSG_api_interface.amplicon_functions as amp
+    import SBSG_api_interface.energy_solution_functions as es
+    import SBSG_api_interface.amplicon_functions as amp
 
 ## EnergySolutions
 
