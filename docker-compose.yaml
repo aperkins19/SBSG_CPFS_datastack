@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    container_name: postgresql
+    hostname: postgres_hostname
+    ports:
+      - 5432:5432
+    volumes:
+      - ./SBSG_Postgres_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=username # The PostgreSQL user (useful to connect to the database)
+      - POSTGRES_PASSWORD=password # The PostgreSQL password (useful to connect to the database)
+      - POSTGRES_DB=default_database # The PostgreSQL default database (automatically created at first launch)
+
+
+  web:
+    build: ./website
+    image: flask_webapp_image
+    container_name: flask_webapp_container
+    volumes:
+      - ./website:/code
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+
+  pgadmin4:
+    image: dpage/pgadmin4:4.27
+    container_name: pgadmin4
+    ports:
+      - 80:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@root.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    hostname: pgadmin4
+    tty: true
+
+  api:
+    build: ./api
+    image: flask_api_image
+    container_name: flask_api_container
+    volumes:
+      - ./api:/api
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+
+
+  api_input:
+    build: ./api_input
+    image: api_tester
+    container_name: api_tester
+
+    ports:
+      - 2000:2000
+
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+
+    volumes:
+    - ./api_input:/api_test
