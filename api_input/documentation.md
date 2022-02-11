@@ -10,6 +10,8 @@ Then execute your scripts:
 e.g.
     python test.py
 
+have fun!
+
 # Installation
 
     import SBSG_api_interface.energy_solution_functions as es
