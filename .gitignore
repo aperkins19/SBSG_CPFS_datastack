@@ -1,2 +1,2 @@
 # Ignore the database directory
-/SBSG_Postgres_db
+SBSG_Postgres_db
